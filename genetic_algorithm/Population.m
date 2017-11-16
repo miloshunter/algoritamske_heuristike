@@ -1,12 +1,12 @@
 classdef Population < handle
     % Class for implementing Genetic Algorithm
     properties
-        arr = []
-        rank = []
-        max_fitness
+        arr = []        % Contains individuals
+        rank = []       % Ranking of individuals
+        max_fitness     % Max and min fitness
         min_fitness
-        mean_fitness
-        best_individual
+        mean_fitness    % Average index for population
+        best_individual % Best individual in population
     end
     
     methods
@@ -46,6 +46,7 @@ classdef Population < handle
             end
         end
         
+        %   Select individuals using probability, without elitism
         function selected_individuals = select_for_next(obj)
             number = round(length(obj.arr)/2);
             probability = zeros(1, length(obj.arr));
