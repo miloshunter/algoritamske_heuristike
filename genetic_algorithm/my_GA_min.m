@@ -1,70 +1,60 @@
 function y = my_GA_min()
 
     t = 1;
-    num_of_iterations = 30;
+    num_of_iterations = 15;
     population_number = 10;
     parameter_number = 1;
 
     % Init population
-    P = Population(rand(population_number, parameter_number));
+    P(t) = Population(rand(population_number, parameter_number));
 
     % Evaluate population
-    P.evaluate;
-    P.rank_population;
+    P(t).evaluate;
+    P(t).rank_population;
     
     % Check if termination is reached
     while (t <= num_of_iterations)
         % Select solution for next population
         %   Rank population
-        e_tmp = E(:, :);
-        selected_indices = zeros(5, 1);
+        P(t).evaluate;
         
-        for cnt_ind = 1:numel(selected_indices)
-            [~, index] = min(e_tmp);
-            selected_indices(cnt_ind) = index;
-            e_tmp(index) = Inf;
-        end
+        fprintf("%d.\t min: %f\t\tmean: %f\t\t x: %f\n", t, P(t).min_fitness, P(t).mean_fitness, P(t).best_individual);
+        P(t).rank_population;
+        next_gen = P(t).select_for_next;
         
+        % Prepare next generation
+        t = t + 1;
         % Perform crossover and mutation
-        %   Crossover
-        cros_and_mut_values = zeros(5, 1);
-        cros_and_mut_values(1) = (P(selected_indices(1)) + P(selected_indices(2)))/2;
-        cros_and_mut_values(2) = (P(selected_indices(3)) + P(selected_indices(4)))/2;
-        
-        % Mutation
-        xmin = 0.8;
-        xmax = 1.2;
-        rand_factor = xmin+rand(1)*(xmax-xmin);
-        cros_and_mut_values(3) = P(selected_indices(5))*rand_factor;
-        cros_and_mut_values(4) = P(selected_indices(1))*rand_factor;
-        cros_and_mut_values(5) = P(selected_indices(2))*rand_factor;
-        new_population = Inf(10, 1);
-        
-        for cnt = 1:numel(new_population)
-            if cnt <= numel(selected_indices)
-                new_population(cnt) = P(selected_indices(cnt));
+        while length(next_gen) < population_number
+            if rand > 0.5
+                %mutation
+                element = datasample(next_gen, 1);
+                element.mutate;
+                
+                next_gen = [next_gen, element];
             else
-                new_population(cnt) = cros_and_mut_values(cnt - 5);
+                %crossover
+                if (population_number - length(next_gen)) > 3
+                    elements = datasample(next_gen, 2);
+                    if elements(1).fitness ~= elements(2).fitness
+                        elements = Individual.crossover(elements);
+                        next_gen = [next_gen, elements];
+                    end
+                end
             end
         end
+        next_gen = next_gen(1:population_number);
+        init_gen = zeros(population_number);
+        for i = 1:population_number
+            init_gen(i) = next_gen(i).getFloat;
+        end
         
-        % Evaluate population
-        E = evaluate_population(new_population);
-        P = new_population;
+        P(t) = Population(init_gen);
         
-        [minE, indE] = min(E);
-        fprintf("%d.\t min: %f\t\t x: %f\n", t, min(E), P(indE));
-        
-        t = t + 1;
     end
     
-y = min(E);
+    [min_overall, index] = min([P.min_fitness])
+    best_individual = P(index).best_individual
+    
 end
 
-
-function result = evaluate_population(P)
-    result = zeros(numel(P), 1);
-    for i_ev = 1:numel(P)
-        result(i_ev) = custom_function(P(i_ev));
-    end
-end

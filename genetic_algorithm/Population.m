@@ -6,6 +6,7 @@ classdef Population < handle
         max_fitness
         min_fitness
         mean_fitness
+        best_individual
     end
     
     methods
@@ -31,6 +32,9 @@ classdef Population < handle
             obj.min_fitness = min([obj.arr.fitness]);
             obj.max_fitness = max([obj.arr.fitness]);
             obj.mean_fitness = mean([obj.arr.fitness]);
+            
+            [~, best_index] = min([obj.arr.fitness]);
+            obj.best_individual = obj.arr(best_index).getFloat;
         end
         
         function obj =  rank_population(obj)
@@ -40,6 +44,33 @@ classdef Population < handle
                 obj.rank(cnt_ind) = index;
                 tmp_eval(index) = Inf;
             end
+        end
+        
+        function selected_individuals = select_for_next(obj)
+            number = round(length(obj.arr)/2);
+            probability = zeros(1, length(obj.arr));
+            selected = zeros(1, length(obj.arr));
+            
+            probability(1) = 1/number;
+            for i = 2:length(probability)
+                probability(i) = (1-sum(probability))/number;
+            end
+            probability = 1-probability;
+            
+            tmp = [];
+            i = 0;
+            while i < number
+                prob = rand();
+                [~, index] = min(abs(prob-probability));
+                if selected(index) == 0
+                    tmp = [tmp, obj.arr(obj.rank(index))];
+                    probability(index) = Inf;
+                    i = i + 1;
+                    selected(index) = 1;
+                end
+            end
+            
+            selected_individuals = tmp;
         end
     end
     

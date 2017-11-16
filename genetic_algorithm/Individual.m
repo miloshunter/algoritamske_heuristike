@@ -42,21 +42,22 @@ classdef Individual < handle
         
     end
     methods (Static)
-        function [out1, out2] = crossover(in1, in2)
+        function out = crossover(in)
             % Mix chromosomes
             cros_point = randi([2, 6], 1);
-            tmp1 = in1.value(1:cros_point);
-            tmp2 = in2.value((cros_point + 1):8);
+            tmp1 = in(1).value(1:cros_point);
+            tmp2 = in(2).value((cros_point + 1):8);
             tmp_val = bin2dec(strcat(tmp1, tmp2))/255;
             
             out1 = Individual(tmp_val);
             
-            tmp1 = in2.value(1:cros_point);
-            tmp2 = in1.value(cros_point:8);
+            tmp1 = in(2).value(1:cros_point);
+            tmp2 = in(1).value((cros_point+1):8);
             tmp_val = bin2dec(strcat(tmp1, tmp2))/255;
             
             out2 = Individual(tmp_val);
             
+            out = [out1, out2];
         end
     end
 
