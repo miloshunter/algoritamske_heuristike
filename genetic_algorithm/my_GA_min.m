@@ -35,6 +35,7 @@ function my_GA_min()
                 % Crossover if there are at least 2 elements in array
                 if (POPULATION_NUMBER - length(next_gen)) > 2
                     elements = datasample(next_gen, 2);
+                    % Do not crossover same elements
                     if elements(1).fitness ~= elements(2).fitness
                         elements = Individual.crossover(elements);
                         next_gen = [next_gen, elements];
