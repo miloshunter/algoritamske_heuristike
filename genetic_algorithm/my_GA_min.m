@@ -1,21 +1,21 @@
 function my_GA_min()
     % Choose parameters for running application
-    NUM_OF_ITERATIONS = 30; %   How many populations?
-    POPULATION_NUMBER = 10; %   Number of individuals in population?
-    PLOT = true;            %   Should grapsh be ploted?
-    NUMBER_OF_BITS = 8;     %   Bits in Floating number representation?
+    NUM_OF_ITERATIONS = 50; %   How many populations?
+    POPULATION_NUMBER = 50; %   Number of individuals in population?
+    PLOT = false;            %   Should grapsh be ploted?
+    NUM_OF_BITS = 8;     %   Bits in Floating number representation?
     VARIABLE_NUMBER = 1;   %   How many variables are in function?
     
     t = 1;
     % Init population
-    P(t) = Population(rand(POPULATION_NUMBER, VARIABLE_NUMBER));
+    P(t) = Population(rand(POPULATION_NUMBER, VARIABLE_NUMBER), NUM_OF_BITS);
     
     % Check if termination is reached
     while (t <= NUM_OF_ITERATIONS)
         %   Evaluate and Rank population
         P(t).evaluate;
         P(t).rank_population;
-        fprintf("%d.\t min: %f\t\tmean: %f\t\t x: %f\n", t, P(t).min_fitness, P(t).mean_fitness, P(t).best_individual);
+        fprintf("%d.\t min: %.10f\t\tmean: %.10f\t\t x: %.10f\n", t, P(t).min_fitness, P(t).mean_fitness, P(t).best_individual);
         
         %   Select for next generation
         next_gen = P(t).select_for_next;
@@ -49,14 +49,14 @@ function my_GA_min()
             init_gen(i) = next_gen(i).getFloat;
         end
         
-        P(t) = Population(init_gen);
+        P(t) = Population(init_gen, NUM_OF_BITS);
         
     end
     
     [min_overall, index] = min([P.min_fitness]);
     best_individual = P(index).best_individual;
     
-    fprintf('\nMinimum: %f \tBest individual: %f\n', min_overall, best_individual);
+    fprintf('\nMinimum: %.20f \tBest individual: %.20f\n', min_overall, best_individual);
     
     if PLOT 
         plot_figures(P)

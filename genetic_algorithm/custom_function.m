@@ -1,3 +1,3 @@
 function y = custom_function(x)
 
-y = (x - 0.5)^2 + 0.5;
+y = (x - 0.3918752342343)^2;

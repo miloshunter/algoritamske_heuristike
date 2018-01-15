@@ -7,13 +7,15 @@ classdef Population < handle
         min_fitness
         mean_fitness    % Average index for population
         best_individual % Best individual in population
+        num_of_bits     % Number of bits used
     end
     
     methods
-        function out = Population(values)
+        function out = Population(values, num_of_bits)
             for i = 1:length(values)
-                out = out.addIndividual(Individual(values(i)));
+                out = out.addIndividual(Individual(values(i), num_of_bits));
             end
+            out.num_of_bits = num_of_bits;
         end
         
         function obj =  addIndividual(obj, individual)
