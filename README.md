@@ -2,7 +2,7 @@
 
 ## Genetic algorithms
 ### Implementation of Genetic Altorithm for function minimization
-8-bit string representation of a float number
+Custom length-bit string representation of a float number
 For mutation flipping of random bit is used
 For crossover two bitstrings are split and mixed at random point
 ### 3-SAT functions that can be solved with Matlab's optimtool
