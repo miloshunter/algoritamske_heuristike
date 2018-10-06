@@ -19,3 +19,9 @@ And by using matlabs GA solver from optimtool, we can find solution to the probl
 Using the Matlab's NeuralNetwork toolbox, 4 parity function is implemented
 Also custom function is implemented, including the Simulink model of a trained network:
 ![equation](https://latex.codecogs.com/gif.latex?(x1\cdot&space;x2&space;&plus;&space;\overline{x3\cdot&space;x4})\cdot&space;x1)
+
+## Cellular automata
+### WireWorld
+In WireWorld cellular automata, custom digital circuit is implemented:
+![equation](https://latex.codecogs.com/gif.latex?(x1\cdot&space;x2&space;&plus;&space;x3\cdot&space;x4)\cdot&space;x1)
+The file opens in Golly application for cellular automata simulation
