@@ -1,5 +1,12 @@
 # Algorithm Heuristics
 
+## A* maze search
+The problem of maze search is solved using 3 different algorithm:
+	-	Breadth first search
+	-	Greedy Best first search
+	-	A* (A star) search
+The simulation is drawn and one can see the algorithm working realtime
+	
 ## Genetic algorithms
 ### Implementation of Genetic Altorithm for function minimization
 Custom length-bit string representation of a float number
@@ -20,8 +27,10 @@ Using the Matlab's NeuralNetwork toolbox, 4 parity function is implemented
 Also custom function is implemented, including the Simulink model of a trained network:
 ![equation](https://latex.codecogs.com/gif.latex?(x1\cdot&space;x2&space;&plus;&space;\overline{x3\cdot&space;x4})\cdot&space;x1)
 
-## Cellular automata
-### WireWorld
+## Cellular automata (WireWorld)
 In WireWorld cellular automata, custom digital circuit is implemented:
 ![equation](https://latex.codecogs.com/gif.latex?(x1\cdot&space;x2&space;&plus;&space;x3\cdot&space;x4)\cdot&space;x1)
 The file opens in Golly application for cellular automata simulation
+
+## Partitioning of a digital circuit
+Partition is done both with Kernighan Lin algorithm and Simulated Annealing

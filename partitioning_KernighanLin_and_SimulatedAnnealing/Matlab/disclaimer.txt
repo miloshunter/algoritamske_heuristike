@@ -1,0 +1,10 @@
+The code for both examples is taken and then modified for the purpose of solving partitioning problem.
+
+Kernighan-Lin code is taken from:
+
+http://www.elektronika.ftn.uns.ac.rs/images/file/4godina/Algoritmi%20u%20projektovan
+ju%20digitalnih%20kola%20visokog%20stepena%20integracije/Vezba2.zip
+
+And the Simulated Annealing base is taken from:
+
+http://www.mathworks.com/matlabcentral/fileexchange/10548-general-simulatedannealing-algorithm
