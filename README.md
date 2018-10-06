@@ -2,15 +2,20 @@
 
 ## A* maze search
 The problem of maze search is solved using 3 different algorithm:
+
 	-	Breadth first search
+	
 	-	Greedy Best first search
+	
 	-	A* (A star) search
 The simulation is drawn and one can see the algorithm working realtime
 	
 ## Genetic algorithms
 ### Implementation of Genetic Altorithm for function minimization
 Custom length-bit string representation of a float number
+
 For mutation flipping of random bit is used
+
 For crossover two bitstrings are split and mixed at random point
 ### 3-SAT functions that can be solved with Matlab's optimtool
 Equation:
@@ -24,6 +29,7 @@ And by using matlabs GA solver from optimtool, we can find solution to the probl
 ## Artificial neural network
 ### NeuralNetwork toolbox
 Using the Matlab's NeuralNetwork toolbox, 4 parity function is implemented
+
 Also custom function is implemented, including the Simulink model of a trained network:
 ![equation](https://latex.codecogs.com/gif.latex?(x1\cdot&space;x2&space;&plus;&space;\overline{x3\cdot&space;x4})\cdot&space;x1)
 
